@@ -10,12 +10,25 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-active: #DD4C29;
+  --color-accent: #77A6D4;
+  --color-primary: #4a6671;
+  --color-primary_light: #E8EAEC;
+  --color-primary_medium: #D0D6DD;
+  --color-primary_dark: #252A41;
+  --color-background: #8E98B0;
+  --color-text_primary: #0B121E;
+  --color-text_secondary: #989A9C;
+
+  --color-white: #EDEFF0;
+  --color-black: #0E0807;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: ##ededed;
+    --foreground: #171717;
   }
 }
 

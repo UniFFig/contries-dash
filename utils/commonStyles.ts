@@ -1,0 +1,1 @@
+export const interactiveComponent = 'transition-all duration-200 ease-in-out hover:opacity-80 focus:outline-2 focus:outline-primary focus:outline-offset-2 focus-visible:outline focus:not-visible:outline-none';

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#DD4C29" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#DD4C29" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="planet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7a5c"/>
+      <stop offset="100%" stop-color="#DD4C29"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="256" cy="256" r="220" fill="url(#glow)"/>
+  <circle cx="256" cy="256" r="150" fill="url(#planet)" stroke="#c63f20" stroke-width="4"/>
+
+  <!-- Americas -->
+  <path d="M170 150 
+           C145 165, 135 190, 145 215
+           C155 235, 180 235, 190 255
+           C200 275, 190 320, 205 355
+           C215 375, 245 355, 245 330
+           C245 300, 255 280, 240 255
+           C225 230, 210 225, 205 205
+           C200 185, 215 165, 200 150
+           C190 140, 180 142, 170 150Z"
+        fill="#ff9b84" opacity="0.9"/>
+
+  <!-- Europe/Africa -->
+  <path d="M300 135
+           C325 130, 355 145, 365 165
+           C375 185, 360 205, 350 220
+           C340 235, 345 255, 340 285
+           C335 315, 320 345, 300 365
+           C285 350, 280 320, 285 295
+           C290 265, 275 245, 280 220
+           C285 195, 300 175, 295 155
+           C292 145, 292 138, 300 135Z"
+        fill="#ff9b84" opacity="0.9"/>
+
+  <!-- Highlight -->
+  <ellipse cx="205" cy="180" rx="65" ry="35"
+           fill="white" opacity="0.15"
+           transform="rotate(-25 205 180)"/>
+</svg>
