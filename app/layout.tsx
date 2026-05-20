@@ -29,7 +29,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">{children}</body>
 
-      {/* Future enhancements - parallel rendering for the country detail data. But keeping everything on page.tsx for the sake of time */}
+      {/* Future enhancements - parallel rendering for individual country data. But keeping everything on page.tsx for the sake of time */}
 
     </html>
   );

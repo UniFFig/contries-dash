@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Country } from "@/types/country";
+import { Country } from "@/types/types";
 
 type CountryStore = {
   selectedCountry: Country | null;

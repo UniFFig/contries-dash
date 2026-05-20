@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 
-import { Country } from "@/types/country";
+import { Country } from "@/types/types";
 import SortableHeader from "@/components/SortableHeader";
 import { interactiveComponent } from "@/utils/commonStyles";
 import { useCountryStore } from "@/stores/countryStore";
@@ -48,6 +48,10 @@ export default function CountriesTable({
   const [page, setPage] = useState(1);
 
   const pageSize = 25;
+
+  const selectedCountry = useCountryStore(
+    (state) => state.selectedCountry
+  );
 
   const setSelectedCountry = useCountryStore(
     (state) => state.setSelectedCountry
@@ -141,14 +145,15 @@ export default function CountriesTable({
           placeholder="Search countries..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-blue-500"
+          className={classNames(interactiveComponent, "mt-4 w-full rounded-lg border border-gray-300 px-4 py-2 text-sm")}
         />
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
+      <div className="flex-1 overflow-y-auto overflow-x-auto">
         <table className="min-w-full border-collapse text-sm">
-          <thead className="bg-gray-100 text-left">
+          
+          <thead className="sticky top-0 z-10 bg-gray-100 text-left">
             <tr>
               <SortableHeader
                 label="Country"
@@ -169,23 +174,46 @@ export default function CountriesTable({
           </thead>
 
           <tbody>
-            {paginatedCountries.map((country) => (
-              <tr
-                key={country.name.common}
-                onClick={() =>
-                  setSelectedCountry(country)
-                }
-                className="cursor-pointer border-t border-gray-200 hover:bg-gray-50"
-              >
-                <td className="px-4 py-3 font-medium text-blue-700">
-                  {country.name.common}
-                </td>
+            {paginatedCountries.map((country) => {
+              const isSelected =
+                selectedCountry?.name.common ===
+                country.name.common;
 
-                <td className="px-4 py-3">
-                  {country.population.toLocaleString()}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  key={country.name.common}
+                  onClick={() =>
+                    setSelectedCountry(country)
+                  }
+                  className={classNames(
+                    "cursor-pointer transition-colors",
+                    isSelected
+                      ? "border-primary bg-background"
+                      : "border-gray-200 hover:bg-gray-50"
+                  )}
+                >
+                  <td
+                    className={classNames(
+                      "px-4 py-3 font-medium",
+                      isSelected
+                        ? "text-primary_light font-bold"
+                        : "text-blue-700"
+                    )}
+                  >
+                    {country.name.common}
+                  </td>
+                  <td
+                    className={classNames(
+                      "px-4 py-3",
+                      isSelected &&
+                        "font-medium text-primary_light font-bold"
+                    )}
+                  >
+                    {country.population.toLocaleString()}
+                  </td>
+                </tr>
+              );
+            })}
 
             {paginatedCountries.length === 0 && (
               <tr>

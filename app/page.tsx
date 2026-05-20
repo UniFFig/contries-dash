@@ -49,10 +49,10 @@ export default async function Home() {
 
             {/* Top Cards */}
             <div className="grid auto-rows-fr grid-cols-1 gap-6 lg:grid-cols-2">
-              <div className="flex min-h-[320px] w-full min-w-0 justify-center">
+              <div className="flex min-h-96 w-full min-w-0 justify-center">
                 <CountryDetails />
               </div>
-              <div className="flex min-h-[320px] w-full min-w-0 justify-center! lg:justify-start!">
+              <div className="flex min-h-96 w-full min-w-0 justify-center! lg:justify-start!">
                 <RegionalComparison allCountries={countryList} />
               </div>
             </div>

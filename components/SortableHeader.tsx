@@ -1,4 +1,4 @@
-import { SortableHeaderProps } from "@/types/country";
+import { SortableHeaderProps } from "@/types/types";
 
 export default function SortableHeader({
     label,

@@ -1,13 +1,7 @@
 import classNames from "classnames";
+import { ContainerProps } from "@/types/types";
 
-export interface ContainerProps {
-  primary?: boolean;
-  style?: string;
-  content?: any;
-}
-
-
-const DEFAULT = 'p-8 rounded-xl shadow-lg w-full md:w-fit',
+const DEFAULT = 'flex p-8 rounded-xl shadow-lg w-full justify-center',
 PRIMARY = 'bg-white',
 SECONDARY = 'bg-primary_medium'
 

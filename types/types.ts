@@ -37,3 +37,9 @@ export type SortableHeaderProps = {
     onSort?: (key: keyof Country) => void;
     arrow?: string;
 };
+
+export interface ContainerProps {
+  primary?: boolean;
+  style?: string;
+  content?: any;
+}

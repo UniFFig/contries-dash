@@ -1,6 +1,6 @@
 "use client";
 
-import { Country } from "@/types/country";
+import { Country } from "@/types/types";
 import { useCountryStore } from "@/stores/countryStore";
 import { Bar } from "react-chartjs-2";
 
