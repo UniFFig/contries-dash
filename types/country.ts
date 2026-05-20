@@ -27,6 +27,8 @@ export type Country = {
     svg: string;
     alt?: string;
   };
+  area: number;
+  maps: any;
 };
 
 export type SortableHeaderProps = {

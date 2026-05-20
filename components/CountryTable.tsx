@@ -5,6 +5,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { Country } from "@/types/country";
 import SortableHeader from "@/components/SortableHeader";
 import { interactiveComponent } from "@/utils/commonStyles";
+import { useCountryStore } from "@/stores/countryStore";
 import classNames from "classnames";
 
 type CountriesTableProps = {
@@ -35,7 +36,12 @@ export default function CountriesTable({
     const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
     const [page, setPage] = useState(1);
     
-    const pageSize = 15;
+    const pageSize = 20;
+
+    const setSelectedCountry =
+        useCountryStore(
+            (state) => state.setSelectedCountry
+    );
 
     useEffect(() => {
         setPage(1);
@@ -139,7 +145,10 @@ export default function CountriesTable({
                 {paginatedCountries.map((country) => (
                 <tr
                     key={country.name.common}
-                    className="border-t border-gray-200 hover:bg-gray-50"
+                    onClick={() =>
+                        setSelectedCountry(country)
+                    }
+                    className="border-t border-gray-200 hover:bg-gray-50 cursor-pointer"
                 >
                     <td className="px-4 py-3 font-medium text-blue-700" onClick={()=>{}}>
                         {country.name.common}
@@ -147,12 +156,6 @@ export default function CountriesTable({
                     <td className="px-4 py-3" onClick={()=>{}}>
                         {country.population.toLocaleString()}
                     </td>
-
-                    {/* <td className="px-4 py-3">
-                    {Object.values(country.currencies)
-                        .map((currency) => currency.name)
-                        .join(", ")}
-                    </td> */}
                 </tr>
                 ))}
 

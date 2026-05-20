@@ -3,9 +3,15 @@ import Image from "next/image";
 import icon from "@/assets/icon.svg";
 import CountriesTable from "@/components/CountryTable";
 import { getAllCountries } from "@/services/restCountries";
+import CountryDetails from "@/components/CountryDetails";
+import PopulationComparison from "@/components/PopulationComparison";
+import classNames from "classnames";
 
 export default async function Home() {
   const countryList = await getAllCountries();
+
+  const CARDS_CLASS = 'w-full h-full flex-1 flex items-center mt-8 ml-8'
+
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-background font-sans px-16">
       <main className="flex flex-1 w-full h-fit flex-col items-center mt-16 pt-12 px-8 bg-primary_light sm:items-start rounded-4xl">
@@ -17,7 +23,7 @@ export default async function Home() {
         {/* Content */}
         <div className="flex justify-between">
           {/* Left Column start*/}
-            <div className="w-full h-full flex-1 flex items-center justify-start mt-8 ml-2">
+            <div className={classNames(CARDS_CLASS, "ml-2! justify-start")}>
               <Container
                 primary
                 content={
@@ -28,8 +34,19 @@ export default async function Home() {
           {/* Left Column end*/}
 
           {/* Right Column */}
-            <div className="w-full h-full flex-1 flex items-center justify-center mt-8 ml-8">
-
+            <div className="flex flex-col">
+              <div className="flex flex-row">
+                <div className={classNames(CARDS_CLASS, "justify-start")}>
+                  <CountryDetails />
+                </div>
+                <div className={classNames(CARDS_CLASS, "justify-start")}>
+                  <CountryDetails />
+                </div>
+              </div>
+              
+              <div className={classNames(CARDS_CLASS, "justify-center")}>
+                <PopulationComparison allCountries={countryList} />
+              </div>
             </div>
           {/* Right Column end*/}
         </div>

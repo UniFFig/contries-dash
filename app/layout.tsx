@@ -28,6 +28,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
+
+      {/* Future enhancements - parallel rendering for the country detail data. But keeping everything on page.tsx for the sake of time */}
+
     </html>
   );
 }
