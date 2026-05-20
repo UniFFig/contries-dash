@@ -36,7 +36,7 @@ export default function CountriesTable({
     const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
     const [page, setPage] = useState(1);
     
-    const pageSize = 20;
+    const pageSize = 25;
 
     const setSelectedCountry =
         useCountryStore(

@@ -28,7 +28,6 @@ export type Country = {
     alt?: string;
   };
   area: number;
-  maps: any;
 };
 
 export type SortableHeaderProps = {

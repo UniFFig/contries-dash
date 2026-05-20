@@ -16,6 +16,11 @@ export const Container = ({
   style,
   content
 }: ContainerProps) => {
+
+  if(!content){
+    return null
+  }
+
   return (
     <div className={classNames(DEFAULT, primary ? PRIMARY : SECONDARY, style)}>
         {content}

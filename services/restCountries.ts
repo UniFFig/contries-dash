@@ -4,7 +4,7 @@ const BASE_URL = "https://restcountries.com/v3.1";
 
 export async function getAllCountries(): Promise<Country[]> {
   const response = await fetch(
-    `${BASE_URL}/all?fields=name,population,region,capital,flags,languages,currencies,area,maps`,
+    `${BASE_URL}/all?fields=name,population,region,capital,flags,languages,currencies,area`,
     {
       next: { revalidate: 3600 },
     }

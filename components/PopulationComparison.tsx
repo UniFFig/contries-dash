@@ -48,7 +48,7 @@ export default function PopulationComparison(allCountries: PopulationTableProps)
             labels: topPopulatedCountries.map(c => c.name.common),
             datasets: [
                 {
-                    label: "Total Population",
+                    label: selectedCountry ? "Total Population Compaired to Top 5 Populated Countries" : "Top 5 Populated Countries",
                     data: topPopulatedCountries.map(c => c.population),
                     backgroundColor: "rgba(119, 166, 212, 0.5)",
                     borderColor: "rgba(119, 166, 212, 1)",
@@ -80,7 +80,7 @@ export default function PopulationComparison(allCountries: PopulationTableProps)
             labels: topPopulationDensity.map(c => c.name),
             datasets: [
                 {
-                    label: "Population Density (people per sq km)",
+                    label: selectedCountry ? "Population Density (people per sq km) Compaired to Top 5 Most Dense Countries" : "Top 5 Most Densely Populated Countries",
                     data: topPopulationDensity.map(c => c.populationDensity),
                     backgroundColor: "rgba(221, 76, 41, 0.5)",
                     borderColor: "rgba(221, 76, 41, 1)",
