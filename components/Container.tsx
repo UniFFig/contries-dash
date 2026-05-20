@@ -7,7 +7,7 @@ export interface ContainerProps {
 }
 
 
-const DEFAULT = 'p-8 rounded-xl shadow-lg',
+const DEFAULT = 'p-8 rounded-xl shadow-lg w-full md:w-fit',
 PRIMARY = 'bg-white',
 SECONDARY = 'bg-primary_medium'
 

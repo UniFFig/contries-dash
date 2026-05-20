@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Country } from "@/types/country";
 import { useCountryStore } from "@/stores/countryStore";
 import { Bar } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -27,82 +27,110 @@ ChartJS.register(
   Legend
 );
 
-export default function PopulationComparison(allCountries: PopulationTableProps) {
-  const selectedCountry =
-    useCountryStore(
-      (state) => state.selectedCountry
-    );
-    const flattenedCountries = allCountries.allCountries
+export default function PopulationComparison({
+  allCountries,
+}: PopulationTableProps) {
+  const selectedCountry = useCountryStore(
+    (state) => state.selectedCountry
+  );
 
-    //Population comparison - top 5 most populated countries + selected country if not in top 5
-    const topPopulatedCountries = flattenedCountries
-        .sort((a, b) => b.population - a.population)
-        .slice(0, 5);
-        
-    if(selectedCountry && !topPopulatedCountries.includes(selectedCountry)) {
-        topPopulatedCountries.push(selectedCountry)
-    }
+  const topPopulatedCountries = [...allCountries]
+    .sort((a, b) => b.population - a.population)
+    .slice(0, 5);
 
-    const TotalPopulationBarChart = () => {
-        const data = {
-            labels: topPopulatedCountries.map(c => c.name.common),
-            datasets: [
-                {
-                    label: selectedCountry ? "Total Population Compaired to Top 5 Populated Countries" : "Top 5 Populated Countries",
-                    data: topPopulatedCountries.map(c => c.population),
-                    backgroundColor: "rgba(119, 166, 212, 0.5)",
-                    borderColor: "rgba(119, 166, 212, 1)",
-                    borderWidth: 1,
-                }
-            ]
-        };
+  if (
+    selectedCountry &&
+    !topPopulatedCountries.find(
+      (c) => c.name.common === selectedCountry.name.common
+    )
+  ) {
+    topPopulatedCountries.push(selectedCountry);
+  }
 
-        const options = {
-            responsive: true,
-        };
+  const topPopulationDensity = [...allCountries]
+    .map((country) => ({
+      name: country.name.common,
+      populationDensity: country.population / country.area,
+    }))
+    .sort((a, b) => b.populationDensity - a.populationDensity)
+    .slice(0, 5);
 
-        return <Bar data={data} options={options} className="h-92" />;
-    };
+  if (
+    selectedCountry &&
+    !topPopulationDensity.find(
+      (c) => c.name === selectedCountry.name.common
+    )
+  ) {
+    topPopulationDensity.push({
+      name: selectedCountry.name.common,
+      populationDensity:
+        selectedCountry.population / selectedCountry.area,
+    });
+  }
 
-    //Population density comparison - top 5 most densely populated countries + selected country if not in top 5
-    const topPopulationDensity = flattenedCountries.map(country => {
-        return {
-            name: country.name.common,
-            populationDensity: country.population / country.area
-        }
-    }).sort((a, b) => b.populationDensity - a.populationDensity).slice(0, 5)
-    if(selectedCountry && !topPopulationDensity.find(c => c.name === selectedCountry.name.common)) {
-        topPopulationDensity.push({ name: selectedCountry.name.common, populationDensity: selectedCountry.population / selectedCountry.area })
-    }
+  const commonOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+    },
+  };
 
-    const PopulationDensityBarChart = () => {
-        const data = {
-            labels: topPopulationDensity.map(c => c.name),
-            datasets: [
-                {
-                    label: selectedCountry ? "Population Density (people per sq km) Compaired to Top 5 Most Dense Countries" : "Top 5 Most Densely Populated Countries",
-                    data: topPopulationDensity.map(c => c.populationDensity),
-                    backgroundColor: "rgba(221, 76, 41, 0.5)",
-                    borderColor: "rgba(221, 76, 41, 1)",
-                    borderWidth: 1,
-                }
-            ]
-        };
+  const populationData = {
+    labels: topPopulatedCountries.map((c) => c.name.common),
+    datasets: [
+      {
+        label: selectedCountry
+          ? `${selectedCountry.name.common} vs Top 5 Countries by Population`
+          : "Top 5 Populated Countries",
+        data: topPopulatedCountries.map((c) => c.population),
+        backgroundColor: "rgba(119, 166, 212, 0.5)",
+        borderColor: "rgba(119, 166, 212, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
 
-        const options = {
-            responsive: true,
-        };
-
-        return <Bar data={data} options={options} className="h-92" />;
-    };
+  const densityData = {
+    labels: topPopulationDensity.map((c) => c.name),
+    datasets: [
+      {
+        label: selectedCountry
+          ? `${selectedCountry.name.common} vs Top 5 Population Density`
+          : "Top 5 Population Density",
+        data: topPopulationDensity.map(
+          (c) => c.populationDensity
+        ),
+        backgroundColor: "rgba(221, 76, 41, 0.5)",
+        borderColor: "rgba(221, 76, 41, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
 
   return (
-    <div>
-      <div className="py-4">
-        <TotalPopulationBarChart />
+    <div className="flex w-full flex-col gap-6">
+      
+      <div className="rounded-xl bg-white p-4 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold">
+          Total Population
+        </h2>
+
+        <div className="h-[300px] w-full sm:h-[400px]">
+          <Bar data={populationData} options={commonOptions} />
+        </div>
       </div>
-      <div className="py-4">
-        <PopulationDensityBarChart />
+
+      <div className="rounded-xl bg-white p-4 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold">
+          Population Density
+        </h2>
+
+        <div className="h-[300px] w-full sm:h-[400px]">
+          <Bar data={densityData} options={commonOptions} />
+        </div>
       </div>
     </div>
   );
