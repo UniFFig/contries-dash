@@ -2,35 +2,24 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+For local development/viewing - [http://localhost:3000](http://localhost:3000)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies used: 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Nextjs and Tailwind as specified in the Technical Assessment brief
+- Zustand - For event driven architecture - In a small application like this with little chance of future enhancement this is a good option but if I were going to build this for scale I would consider adding parellel routing as it would allow for some easier and more interesting selection specific changes for the individual country data
+- Chartjs - For the graphs used in the application - It was my first time using this package and while it was easy to impliment, I would most likely look elsewhere for future/more complex project as it didn't have the depth of analytical tools that I would normally want
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Summary of AI Prompts: 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- I used AI mostly to quickly wireframe some of the UI components such as the Country table which I then used as a base where I could change and slot in my own data/UI specific changes(pagination, colors, etc)
+    - example: I need a typescript/nextjs table for the purpose of displaying all of the countries and their basic statistics. Data can be mocked for now and you only need to include 3 fake entries for the table as long as it will handle longer arrays as well.
+- I also used AI to fix a bug specific to the resizing of some chartjs components where setting the maintainAspectRatio prop in the doughnut caused the component to grow infinitely 
+- The Icon in the header was quickly made using AI as there was no need to design an actual icon 
+- AI was used as a last set of eyes as a reviewer, some unneeded code was removed and slightly reformatted for better readability based on the recommendations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
